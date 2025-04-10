@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+
+/* Define Poppins font with @font-face */
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Extend Tailwind's theme to include Poppins */
+@theme {
+  --font-family-sans: 'Poppins', sans-serif;
+}
+
+/* Reset styles */
+*,
+::after,
+::before {
+  /* margin: 0;
+  padding: 0;
+  box-sizing: border-box; */
+}
+
+html {
+  /* color: var(--text-base);
+  scrollbar-color: hsla(0, 0%, 100%, 0.3) transparent;
+  scrollbar-width: auto; */
+  /* font-family: 'Poppins', sans-serif;  */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Root variables */
+:root {
+  /* Colors */
+  --primary: #0a66af;
+  --black-0: #000;
+  --gray-0: #121212;
+  --gray-10: #1f1f1f;
+  --white-0: #ffffff;
+  --white-10: #fff;
+  --green-0: #1db954;
+  /* Font sizes */
+  --font-size: 1rem;
+  --font-size-larger: 1.5rem;
+  --font-size-smaller: 0.875rem;
+  --font-size-smallest: 0.6875rem;
+  /* Text */
+  --text-base: var(--white-10);
+  --text-secondary-color: #656565;
+  /* Background */
+  --background-color: var(--black-0);
+  --background-color-secondary: var(--gray-0);
+  --background-color-light: var(--gray-10);
+  --white: var(--white-0);
+  /* Border */
+  --background-secondary-color: var(--white);
+  /* Gap */
+  --panel-gap: 0.5rem;
+  /* Button */
+  --size-button: 48px;
+}
+
+/* Dark theme variables */
+.dark-theme {
+  --text-color: var(--dark-mode-text-color);
+  --background-color: var(--dark-mode-bg-color);
+  --text-secondary-color: var(--dark-mode-text-secondary-color);
+  --background-secondary-color: var(--dark-mode-bg-secondary-color);
+}
+
+/* Text utilities */
+@utility text {
+  font-size: var(--font-size);
+  color: var(--text-base);
+}
+
+@utility smallText {
+  font-size: var(--font-size-smaller);
+  color: var(--text-secondary-color);
+}
+
+@utility smallestText {
+  font-size: var(--font-size-smallest);
+  color: var(--text-secondary-color);
+}
+
+@utility largeText {
+  font-size: var(--font-size-larger);
+  color: var(--text-base);
+}
+
+/* Optional: Uncomment if you need this style */
+/* 
+.sash {
+  background-color: transparent !important;
+  width: 50px !important;
+  cursor: col-resize;
+}
+*/
