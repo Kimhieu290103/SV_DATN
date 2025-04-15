@@ -61,13 +61,13 @@ const ActivityTable: React.FC<ActivityTableProps> = ({ events }) => {
           )}
         </tbody>
       </table>
-      {fiveGood ? (
+      {/* {fiveGood ? (
         <div className='mt-10'>
           <span>Bạn đã hoàn thành cả 5 tiêu chí</span>
         </div>
       ) : (
         <span>Bạn đang thiếu tiêu chí</span>
-      )}
+      )} */}
     </div>
   )
 }

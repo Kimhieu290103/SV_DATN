@@ -11,9 +11,9 @@ import ActivityPoint from './pages/User/ActivityPoint'
 import CriteriaPage from './pages/MainPage/CriteriaPage'
 import UserActivity from './pages/User/UserActivity'
 import RegisterPage from "./pages/Guest/RegisterPage";
-
-
-
+import ChangePassword from './pages/User/ChangePassword'
+import RegisteredEvents from './pages/User/RegisteredEvents'
+import UserDisciplinaryPoint from './pages/User/UserDisciplinaryPoint'
 function App() {
   return (
     <>
@@ -32,6 +32,9 @@ function App() {
               <Route path='/user/user-profile' element={<Home />} />
               <Route path='/user/activity-point' element={<ActivityPoint />} />
               <Route path='/user/submit-activity' element={<UserActivity />} />
+              <Route path='/user/chang-pass' element={<ChangePassword />} />
+              <Route path='/user/register-event' element={<RegisteredEvents />} />
+              <Route path='/user/point' element={<UserDisciplinaryPoint />} />
             </Route>
           </Route>
         </Routes>

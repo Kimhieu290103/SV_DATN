@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import {
   Pagination,
   Dialog,
@@ -7,11 +7,12 @@ import {
   DialogActions,
   TextField,
   Button,
-  CircularProgress
+  CircularProgress,
+  MenuItem
 } from '@mui/material'
 import Evidence from '~/model/Evidence/Evidence'
 import EvidenceApi from '~/api/EvidenceApi'
-
+import SemesterApi from '~/api/SemesterApi'
 interface EvidenceListProps {
   data: Evidence[]
 }
@@ -35,11 +36,21 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
   const [date, setDate] = useState('')
   const [proofUrl, setProofUrl] = useState('')
   const [points, setPoints] = useState('')
-  const [semesterId, setSemesterId] = useState('')
-
+ // const [semesterId, setSemesterId] = useState('')
+  const [semesters, setSemesters] = useState([])
+  const [selectedSemester, setSelectedSemester] = useState('')
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  useEffect(() => {
+    const fetchSemesters = async () => {
+      const data = await SemesterApi.getSemesters()
+      if (data) {
+        setSemesters(data)
+      }
+    }
+    fetchSemesters()
+  }, [])
   const handleSubmit = async () => {
     setIsLoading(true)
     const payload = {
@@ -48,7 +59,7 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
       date,
       proof_url: proofUrl,
       points: Number(points),
-      semester_id: Number(semesterId)
+      semester_id: Number(selectedSemester)
     }
 
     try {
@@ -60,7 +71,7 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
       setDate('')
       setProofUrl('')
       setPoints('')
-      setSemesterId('')
+      setSelectedSemester('')
       handleClose()
     } catch (error) {
       console.error('Submit error:', error)
@@ -158,7 +169,12 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
       )}
 
       {/* Modal dialog */}
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} sx={{
+        '& .MuiDialog-paper': {
+          minHeight: '70vh' // Cấu hình chiều cao tối thiểu của toàn bộ Dialog
+           
+        },
+      }}>
         <DialogTitle>Thêm Minh Chứng Mới</DialogTitle>
         <DialogContent>
           <TextField
@@ -177,11 +193,15 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
             onChange={(e) => setDescription(e.target.value)}
           />
           <TextField
-            margin='dense'
-            label='Ngày (yyyy-mm-dd)'
+            margin="dense"
+            label="Ngày (yyyy-mm-dd)"
             fullWidth
+            type="date"  // Chuyển loại trường thành date picker
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            InputLabelProps={{
+              shrink: true,  // Đảm bảo nhãn luôn hiển thị ở trên khi có giá trị
+            }}
           />
           <TextField
             margin='dense'
@@ -197,13 +217,27 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
             value={points}
             onChange={(e) => setPoints(e.target.value)}
           />
-          <TextField
+          {/* <TextField
             margin='dense'
-            label='ID Kỳ học'
+            label='Kỳ học'
             fullWidth
             value={semesterId}
             onChange={(e) => setSemesterId(e.target.value)}
-          />
+          /> */}
+          <TextField
+            select
+            label="Chọn kỳ học"
+            fullWidth
+            value={selectedSemester}
+            onChange={(e) => setSelectedSemester(e.target.value)}
+            margin="dense"
+          >
+            {semesters.map((semester) => (
+              <MenuItem key={semester.id} value={semester.id}>
+                {semester.name}
+              </MenuItem>
+            ))}
+          </TextField>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color='secondary'>
