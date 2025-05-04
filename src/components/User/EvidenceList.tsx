@@ -98,7 +98,7 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
         <>
           <table className='w-full border-collapse'>
             <thead>
-              <tr className='bg-gray-200'>
+              <tr className='bg-blue-500 text-white'>
                 <th className='border p-2'>TT</th>
                 <th className='border p-2'>Thời điểm</th>
                 <th className='border p-2'>Số điểm</th>
@@ -111,7 +111,7 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
                 currentData.map((item, index) => (
                   <tr
                     key={item.id}
-                    className={item.status === 'APPROVED' ? 'bg-pink-100 border-l-4 border-red-500' : ''}
+                    className={item.status === 'APPROVED' ? 'bg-pink-100 border-white' : ''}
                   >
                     <td className='border p-2 text-center'>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                     <td className='border p-2 text-center'>{item.date}</td>

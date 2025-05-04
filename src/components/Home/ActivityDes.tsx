@@ -231,6 +231,8 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
                           <span className="font-bold text-center p-0.5">
                             {checkRegister
                               ? "Hủy đăng ký"
+                               : moment().isBefore(eventData.registrationStartDate)
+        ? "Chưa đến ngày đăng ký"
                               : moment().isAfter(eventData.registrationEndDate)
                                 ? "Hết hạn đăng ký"
                                 : eventData.currentRegistrations >= eventData.maxRegistrations

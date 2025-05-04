@@ -10,5 +10,29 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+	createChat({
+		webhookUrl: 'http://localhost:5678/webhook/171f31ac-7936-42d1-8881-366b8960c596/chat',
+    defaultMessagePayload: {
+          accessToken: 'test-token'
+        },
+    initialMessages: [
+		'Xin chào! 👋',
+		'Tôi là Hiếu, nhân viên tư vấn của Đại học Bách Khoa Đà Nẵng, bạn cần tôi giúp gì không?'
+	],
+  i18n: {
+		en: {
+			title: 'Chatbot tư vấn nội quy',
+			subtitle: "",
+			footer: '',
+			getStarted: 'New Conversation',
+			inputPlaceholder: 'Type your question..',
+		},
+	},
+	});
+</script> 
   </body>
 </html>
