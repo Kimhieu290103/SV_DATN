@@ -11,6 +11,8 @@ import ActivityPoint from './pages/User/ActivityPoint'
 import CriteriaPage from './pages/MainPage/CriteriaPage'
 import UserActivity from './pages/User/UserActivity'
 import RegisterPage from "./pages/Guest/RegisterPage";
+import ForgotPasswordPage  from "./pages/Guest/ForgotPasswordPage";
+import ResetPasswordPage  from "./pages/Guest/ResetPasswordPage";
 import ChangePassword from './pages/User/ChangePassword'
 import RegisteredEvents from './pages/User/RegisteredEvents'
 import UserDisciplinaryPoint from './pages/User/UserDisciplinaryPoint'
@@ -28,6 +30,8 @@ function App() {
             <Route path='/activity/:id' element={<ActivityDes></ActivityDes>}></Route>
             <Route path='/login' element={<LoginPage></LoginPage>}></Route>
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route element={<ProtectedRoute />}>
               <Route path='/user/user-profile' element={<Home />} />
               <Route path='/user/activity-point' element={<ActivityPoint />} />

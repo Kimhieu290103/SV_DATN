@@ -70,15 +70,48 @@ const UserApi = {
         oldPassword,
         newPassword,
       });
-  
+
       if (response.status === 200) {
         return response.data;  // Xử lý dữ liệu trả về nếu cần
       }
     } catch (error) {
       console.log('Error while changing password:', error);
     }
-  }
-  
+  },
+  forgotPassword: async (email: string) => {
+    try {
+      const formData = new FormData();
+      formData.append('email', email);
+
+      const response = await ClientApi.post('/forgotpass/forgot', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // Quan trọng cho form-data
+        },
+      });
+
+      if (response.status === 200) {
+        return response.data; // Xử lý dữ liệu trả về (ví dụ: thông báo thành công)
+      }
+    } catch (error) {
+      console.error('Error while sending forgot password request:', error);
+      throw error; // Re-throw lỗi để component gọi có thể xử lý
+    }
+  },
+  resetPassword: async (token: string, newPassword: string) => {
+    try {
+      const response = await ClientApi.post('/forgotpass/reset', {
+        token,
+        newPassword,
+      });
+
+      if (response.status === 200) {
+        return response.data; // Xử lý dữ liệu trả về nếu cần
+      }
+    } catch (error) {
+      console.error('Error while resetting password:', error);
+      throw error; // Re-throw lỗi để component gọi có thể xử lý
+    }
+  },
 
 }
 export default UserApi

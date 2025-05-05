@@ -27,13 +27,13 @@ const UserActivity: React.FC = () => {
   }, [])
 
   return (
-    <div className='min-h-screen flex flex-col m-0'>
+    <div className='min-h-screen flex flex-col m-0 min-h-[280px]'>
       <div
         className='flex flex-row justify-start items-stretch 
         px-4 md:px-16 lg:px-24 py-20 bg-[#ffffff] w-full 
         sm:max-w-full md:max-w-3xl lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[1500px] mx-auto'
       >
-        <SideNav></SideNav>
+        <SideNav/>
         <MainContent
           title='Gửi minh chứng'
           decs='Những minh chứng về những hoạt động mà

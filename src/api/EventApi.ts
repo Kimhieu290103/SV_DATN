@@ -57,6 +57,22 @@ const EventApi = {
     } catch (error) {
       console.log('error while getEventByType events', error)
     }
+  },
+  searchEvents: async (name: string, page: number = 0, limit: number = 10) => {
+    try {
+      const response = await ClientApi.get('/events/search', {
+        params: {
+          name: name,
+          page: page,
+          limit: limit
+        }
+      })
+      if (response.status === 200) {
+        return response.data
+      }
+    } catch (error) {
+      console.log('error while searching events', error)
+    }
   }
 }
 export default EventApi

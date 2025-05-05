@@ -81,9 +81,9 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
   }
 
   return (
-    <div className='w-3/4 p-4'>
+    <div className='w-full overflow-x-auto p-4 min-h-[280px]'>
       <div className='flex justify-between items-center mb-4'>
-        <h2 className='text-lg font-bold'>Danh sách minh chứng</h2>
+        <h2 className='text-xl font-bold '>Danh sách minh chứng</h2>
         <div>
           <button onClick={handleOpen} className='bg-[#4F959D] text-white px-4 py-2 rounded mr-2'>
             Thêm mới
@@ -96,14 +96,14 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
         </div>
       ) : (
         <>
-          <table className='w-full border-collapse'>
+          <table className='w-full border-collapse rounded-sm overflow-hidden'>
             <thead>
               <tr className='bg-blue-500 text-white'>
-                <th className='border p-2'>TT</th>
-                <th className='border p-2'>Thời điểm</th>
-                <th className='border p-2'>Số điểm</th>
-                <th className='border p-2'>Nguồn khai báo</th>
-                <th className='border p-2'>Trạng thái</th>
+                <th className='border-0 border-blue-950 p-2 w-[100px]'>TT</th>
+                <th className='border-0 border-blue-950 p-2 w-[200px]'>Thời điểm</th>
+                <th className='border-0 border-blue-950 p-2 w-[150px]'>Số điểm</th>
+                <th className='border-0 border-blue-950 p-2 w-[300px]'>Nguồn khai báo</th>
+                <th className='border-0 border-blue-950 p-2 w-[150px]'>Trạng thái</th>
               </tr>
             </thead>
             <tbody>
@@ -111,20 +111,20 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
                 currentData.map((item, index) => (
                   <tr
                     key={item.id}
-                    className={item.status === 'APPROVED' ? 'bg-pink-100 border-white' : ''}
+                    className={item.status === 'APPROVED' ? 'bg-gray-200' : 'bg-gray-100'}
                   >
-                    <td className='border p-2 text-center'>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-                    <td className='border p-2 text-center'>{item.date}</td>
-                    <td className='border p-2 text-center'>
+                    <td className='border-0 p-2 text-center'>{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                    <td className='border-0 p-2 text-center'>{item.date}</td>
+                    <td className='border-0 p-2 text-center'>
                       <a href='#' className='text-blue-500'>
                         {item.points}
                       </a>
                     </td>
-                    <td className='border p-2 text-center text-ellipsis max-w-[150px] whitespace-nowrap overflow-hidden'>
+                    <td className='border-0 p-2 text-center text-ellipsis max-w-[150px] whitespace-nowrap overflow-hidden'>
                       <a href={item.proofUrl}>{item.proofUrl}</a>
                     </td>
                     <td
-                      className={`border p-2 text-center ${
+                      className={`border-0 p-2 text-center ${
                         item.status === 'APPROVED'
                           ? 'text-green-500 border-black'
                           : item.status === 'REJECTED'
@@ -146,7 +146,7 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className='border p-4 text-center text-gray-500'>
+                  <td colSpan={5} className='border-0 p-4 text-center text-gray-500 bg-gray-200'>
                     Không có dữ liệu
                   </td>
                 </tr>

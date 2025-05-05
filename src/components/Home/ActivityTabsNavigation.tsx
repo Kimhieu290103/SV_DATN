@@ -29,9 +29,9 @@ const ActivityTabsNavigation: React.FC = () => {
 
   return (
     <Tabs value={value} onChange={handleChange} aria-label='activity tabs'>
-      <Tab value='one' label='Hoạt động truyền thống' />
-      <Tab value='two' label='Hoạt động học thuật' />
-      <Tab value='three' label='Hoạt động liên chi đoàn' />
+      <Tab value='two' label='Hoạt động truyền thống' />
+      <Tab value='three' label='Hoạt động học thuật' />
+      <Tab value='one' label='Hoạt động liên chi đoàn' />
     </Tabs>
   )
 }

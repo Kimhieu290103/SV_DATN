@@ -34,6 +34,7 @@ const ActivityCard: React.FC<CardProps> = ({ CardInfo }) => {
         <Card
           className='w-full h-full'
           sx={{
+            height: 400,
             boxShadow: 3,
             transition: 'transform 0.2s, box-shadow 0.2s',
             '&:hover': {
