@@ -122,6 +122,7 @@ interface LoginFormValues {
 
 const LoginPage: React.FC = () => {
   const { loading, error: authError } = useSelector((state: RootState) => state.auth); // Theo dõi trạng thái auth
+  const [isLoading,setIsLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState<string | null>(null); // State để quản lý lỗi đăng nhập
@@ -133,8 +134,10 @@ const LoginPage: React.FC = () => {
   } = useForm<LoginFormValues>({ resolver: yupResolver(loginSchema) });
 
   const onSubmit = async (data: { username: string; password: string }) => {
-    setLoginError(null); // Reset lỗi khi người dùng thử đăng nhập lại
+    setIsLoading(true);// Reset lỗi khi người dùng thử đăng nhập lại
     try {
+
+      await new Promise(resolve => setTimeout(resolve, 2000));
       const loginResults = await dispatch(login(data));
       if (login.fulfilled.match(loginResults)) {
         const user = loginResults.payload.userResponse;
@@ -173,6 +176,9 @@ const LoginPage: React.FC = () => {
       setLoginError('Đã xảy ra lỗi không mong muốn.');
       // TODO: Hiển thị toast thông báo lỗi chung
     }
+    finally {
+      setIsLoading(false); // Kết thúc loading sau khi xử lý xong
+    }
   };
 
   return (
@@ -202,7 +208,7 @@ const LoginPage: React.FC = () => {
             />
             {errors.password && <p className='mt-1 text-sm text-red-600'>{errors.password.message}</p>}
           </div>
-          {loginError && <p className='mt-2 text-sm text-red-600'>{loginError}</p>} {/* Hiển thị thông báo lỗi đăng nhập */}
+          {loginError && <p className='mt-2 text-sm text-red-600'>{loginError}</p>} 
           <div className='my-5 text-right'>
             <Link to='/forgot-password' className='text-blue-900 text-sm hover:underline'>
               Quên mật khẩu?
@@ -213,7 +219,7 @@ const LoginPage: React.FC = () => {
             className='w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded cursor-pointer'
             disabled={loading} // Vô hiệu hóa nút khi đang loading
           >
-            {loading ? 'Đang đăng nhập...' : 'Đăng nhập'} {/* Hiển thị trạng thái loading */}
+            {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'} {/* Hiển thị trạng thái loading */}
           </button>
         </form>
         <div className='text-center mt-4'>

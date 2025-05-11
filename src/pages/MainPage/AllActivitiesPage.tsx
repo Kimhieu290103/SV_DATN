@@ -28,6 +28,7 @@ const AllActivitiesPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(pageParam + 1)
   const [eventsData, setEventsData] = useState<EventsData>({ events: [], totalPage: 0 })
   const [isLoading, setIsLoading] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value)
@@ -35,19 +36,24 @@ const AllActivitiesPage: React.FC = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      setIsLoading(true)
+      setIsLoading(true) 
       try {
         const data = await EventApi.getEvents(currentPage - 1, limit)
-        setEventsData(data)
+        if (data?.events && Array.isArray(data.events)) {
+          setEventsData(data)
+          setIsLoading(false)
+        } else {
+          // Nếu không có dữ liệu hợp lệ, vẫn giữ isLoading = true
+          console.warn('Dữ liệu không hợp lệ:', data)
+        }
       } catch (error) {
-        console.error('Error fetching events:', error)
+        console.error('Không thể tải sự kiện:', error)
+        // Không set isLoading = false => UI sẽ vẫn hiển thị loading
       }
-      setIsLoading(false)
     }
 
     fetchEvents()
   }, [eventTypeId, currentPage, limit])
-
   return (
     <div
       className='relative z-10 flex flex-col justify-center items-center
@@ -55,10 +61,12 @@ const AllActivitiesPage: React.FC = () => {
      xl:max-w-[1200px] 
      mx-auto'
     >
-      <h1 className='text-2xl font-bold my-4'>Danh sách Hoạt động</h1>
+      <span className='mb-8 text-center text-xl sm:text-2xl md:text-3xl font-bold text-blue-900'>
+        Danh sách hoạt động
+      </span>
       {isLoading ? (
         <div className='flex justify-center items-center min-h-[200px]'>
-          <CircularProgress />
+          <CircularProgress size={50} />
         </div>
       ) : (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 '>

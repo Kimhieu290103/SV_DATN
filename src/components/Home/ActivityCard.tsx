@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import FormattedDate from '~/utils/FormattedDate'
 import { CircularProgress } from '@mui/material'
 import { useState } from 'react'
-
+import defaultImage from '../../../public/favicon/sinh20vic3aan20bk.jpg';
 interface CardProps {
   CardInfo: Event
 }
@@ -45,7 +45,7 @@ const ActivityCard: React.FC<CardProps> = ({ CardInfo }) => {
         >
           <CardMedia
             component='img'
-            image={CardInfo?.eventImage[0]?.imageUrl || null}
+            image={CardInfo?.eventImage[0]?.imageUrl || defaultImage}
             alt='Activity'
             sx={{
               height: '45%',
@@ -56,11 +56,11 @@ const ActivityCard: React.FC<CardProps> = ({ CardInfo }) => {
           <div className='flex justify-between flex-col h-[55%]'>
             <CardHeaderNoPadding
               onClick={() => navigate(`/activity/${CardInfo.id}`)}
-              avatar={
-                <Avatar className='bg-amber-900' aria-label='recipe' sx={{ padding: '0px' }}>
-                  R
-                </Avatar>
-              }
+              // avatar={
+              //   <Avatar className='bg-amber-900' aria-label='recipe' sx={{ padding: '0px' }}>
+              //     R
+              //   </Avatar>
+              // }
               title={CardInfo?.name}
               sx={{
                 '& .MuiCardHeader-title': {

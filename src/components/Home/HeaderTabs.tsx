@@ -8,7 +8,9 @@ interface Props {
 
 const HeaderTabs: React.FC<Props> = ({ isScrolled = false, redirectPathname, title }) => {
   const location = useLocation()
-  const isActive = location.pathname === redirectPathname
+  const isActive = redirectPathname === '/'
+    ? location.pathname === '/'
+    : location.pathname.startsWith(redirectPathname.split('?')[0]); 
 
   return (
     <div

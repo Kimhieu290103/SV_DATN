@@ -8,7 +8,7 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import moment from 'moment'
 import FormattedDate from '~/utils/FormattedDate'
 import { store } from '~/store/store'
-
+import defaultImage from '../../../public/favicon/sinh20vic3aan20bk.jpg';
 interface ActivityDesProps {
   propName?: number
 }
@@ -130,7 +130,7 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
               <div className='flex flex-row justify-center items-center pb-4'>
                 <img
                   className='w-full rounded-lg'
-                  src={eventData.eventImage[0]?.imageUrl || 'default-image-url'}
+                  src={eventData.eventImage[0]?.imageUrl || defaultImage}
                   alt={eventData.name}
                 />
               </div>
@@ -183,66 +183,76 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
                 </div>
                 <div>
                   {checkRegister ? (
-                    <Button
-                      variant='outlined'
-                      sx={{
-                        backgroundColor: '#1c398e',
-                        borderRadius: '8px',
-                        '&:hover': { backgroundColor: '#0a67af' }
-                      }}
-                      size='small'
-                      onClick={handleUnregister}
-                    >
-                      <span className='font-bold text-white text-center p-0.5'>Hủy đăng ký</span>
-                    </Button>
+                    moment().isAfter(eventData.registrationEndDate) ? (
+                      <Button
+                        variant="outlined"
+                        disabled
+                        sx={{
+                          backgroundColor: '#ccc',
+                          borderRadius: '8px',
+                          color: 'black',
+                        }}
+                        size="small"
+                      >
+                        <span className="font-bold text-center p-0.5">Đã đăng ký</span>
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          backgroundColor: '#1c398e',
+                          borderRadius: '8px',
+                          '&:hover': { backgroundColor: '#0a67af' }
+                        }}
+                        size="small"
+                        onClick={handleUnregister}
+                      >
+                        <span className="font-bold text-white text-center p-0.5">Hủy đăng ký</span>
+                      </Button>
+                    )
                   ) : (
-                        <Button
-                          variant="outlined"
-                          sx={{
-                            backgroundColor: checkRegister
-                              ? "#1c398e"
-                              : moment().isAfter(eventData.registrationEndDate) ||
-                                eventData.currentRegistrations >= eventData.maxRegistrations
-                                ? "#ccc" // Nền xám khi bị vô hiệu hóa
-                                : "#1c398e",
-                            borderRadius: "8px",
-                            "&:hover": {
-                              backgroundColor: checkRegister
-                                ? "#0a67af"
-                                : moment().isAfter(eventData.registrationEndDate) ||
-                                  eventData.currentRegistrations >= eventData.maxRegistrations
-                                  ? "#ccc" // Giữ màu xám khi hover
-                                  : "#0a67af",
-                            },
-                            color: checkRegister
-                              ? "white"
-                              : moment().isAfter(eventData.registrationEndDate) ||
-                                eventData.currentRegistrations >= eventData.maxRegistrations
-                                ? "black" // Chữ đen khi vô hiệu hóa
-                                : "white",
-                          }}
-                          size="small"
-                          disabled={
-                            moment().isAfter(eventData.registrationEndDate) ||
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        backgroundColor:
+                          moment().isAfter(eventData.registrationEndDate) ||
                             eventData.currentRegistrations >= eventData.maxRegistrations
-                          }
-                          onClick={handleRegister}
-                        >
-                          <span className="font-bold text-center p-0.5">
-                            {checkRegister
-                              ? "Hủy đăng ký"
-                               : moment().isBefore(eventData.registrationStartDate)
-        ? "Chưa đến ngày đăng ký"
-                              : moment().isAfter(eventData.registrationEndDate)
-                                ? "Hết hạn đăng ký"
-                                : eventData.currentRegistrations >= eventData.maxRegistrations
-                                  ? "Đã đủ số lượng"
-                                  : "Đăng ký"}
-                          </span>
-                        </Button>
-                  
+                            ? '#ccc'
+                            : '#1c398e',
+                        borderRadius: '8px',
+                        '&:hover': {
+                          backgroundColor:
+                            moment().isAfter(eventData.registrationEndDate) ||
+                              eventData.currentRegistrations >= eventData.maxRegistrations
+                              ? '#ccc'
+                              : '#0a67af'
+                        },
+                        color:
+                          moment().isAfter(eventData.registrationEndDate) ||
+                            eventData.currentRegistrations >= eventData.maxRegistrations
+                            ? 'black'
+                            : 'white'
+                      }}
+                      size="small"
+                      disabled={
+                        moment().isAfter(eventData.registrationEndDate) ||
+                        eventData.currentRegistrations >= eventData.maxRegistrations
+                      }
+                      onClick={handleRegister}
+                    >
+                      <span className="font-bold text-center p-0.5">
+                        {moment().isBefore(eventData.registrationStartDate)
+                          ? 'Chưa đến ngày đăng ký'
+                          : moment().isAfter(eventData.registrationEndDate)
+                            ? 'Hết hạn đăng ký'
+                            : eventData.currentRegistrations >= eventData.maxRegistrations
+                              ? 'Đã đủ số lượng'
+                              : 'Đăng ký'}
+                      </span>
+                    </Button>
                   )}
                 </div>
+
               </div>
             )}
           </div>

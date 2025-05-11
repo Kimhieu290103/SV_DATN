@@ -13,11 +13,57 @@ const ChangePassword: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
   const [loading, setLoading] = useState(false)
+  // State để lưu thông báo lỗi cho từng trường
+  const [errors, setErrors] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  })
+
+  // Hàm để xử lý sự kiện nhập liệu và xóa lỗi khi người dùng nhập
+  const handleInputChange = (field: string, value: string) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field]: '', // Xóa lỗi khi người dùng nhập
+    }))
+  }
 
   const handleChangePassword = async () => {
-    // Kiểm tra mật khẩu xác nhận
-    if (newPassword !== confirmPassword) {
-      setMessage({ type: 'error', text: 'Mật khẩu mới không khớp!' })
+    // Kiểm tra các lỗi trước khi gọi API
+    let isValid = true
+    const newErrors = {
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    }
+
+    // Kiểm tra nếu chưa nhập mật khẩu hiện tại
+    if (!currentPassword) {
+      newErrors.currentPassword = 'Mật khẩu hiện tại không được bỏ trống'
+      isValid = false
+    }
+
+    // Kiểm tra nếu chưa nhập mật khẩu mới
+    if (!newPassword) {
+      newErrors.newPassword = 'Mật khẩu mới không được bỏ trống'
+      isValid = false
+    }
+
+    // Kiểm tra nếu chưa nhập lại mật khẩu mới
+    if (!confirmPassword) {
+      newErrors.confirmPassword = 'Xác nhận mật khẩu không được bỏ trống'
+      isValid = false
+    }
+
+    // Kiểm tra nếu mật khẩu mới và mật khẩu xác nhận không khớp
+    if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+      newErrors.confirmPassword = 'Mật khẩu mới và xác nhận mật khẩu không khớp'
+      isValid = false
+    }
+
+    // Nếu có lỗi, cập nhật lỗi và dừng việc gửi yêu cầu
+    if (!isValid) {
+      setErrors(newErrors)
       return
     }
 
@@ -41,13 +87,12 @@ const ChangePassword: React.FC = () => {
       setLoading(false)
     }
   }
-
   return (
-    <div className='min-h-screen flex flex-col m-0 min-h-[280px]'>
+    <div className='min-h-screen flex flex-col m-0 min-h-[280px mt-10] mt-10 bg-gradient-to-br from-blue-100 via-white to-purple-100'>
       <div
         className='flex flex-row justify-start items-stretch 
         px-4 md:px-16 lg:px-24 py-20 bg-[#ffffff] w-full 
-        sm:max-w-full md:max-w-3xl lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[1500px] mx-auto'
+        sm:max-w-full md:max-w-3xl lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[1500px] mx-auto rounded-2xl shadow-xl border border-gray-200  mt-20 mb-20'
       >
         <SideNav />
         <MainContent title='Đổi mật khẩu' decs='Thay đổi mật khẩu tài khoản của bạn tại đây.'>
@@ -61,7 +106,18 @@ const ChangePassword: React.FC = () => {
               type='password'
               fullWidth
               value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
+                onChange={(e) => {
+                setCurrentPassword(e.target.value)
+                handleInputChange('currentPassword', e.target.value)
+              }}
+              sx={{
+                '& .MuiInputBase-root': {
+                  height: 50,
+                  borderRadius: 2,
+                },
+              }}
+                error={Boolean(errors.currentPassword)}
+              helperText={errors.currentPassword}
             />
             {/* Trường mật khẩu mới */}
             <TextField
@@ -69,7 +125,18 @@ const ChangePassword: React.FC = () => {
               type='password'
               fullWidth
               value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              onChange={(e) => {
+                setNewPassword(e.target.value)
+                handleInputChange('newPassword', e.target.value)
+              }}
+              sx={{
+                '& .MuiInputBase-root': {
+                  height: 50,
+                  borderRadius: 2,
+                },
+              }}
+               error={Boolean(errors.newPassword)}
+              helperText={errors.newPassword}
             />
             {/* Trường xác nhận mật khẩu mới */}
             <TextField
@@ -77,7 +144,18 @@ const ChangePassword: React.FC = () => {
               type='password'
               fullWidth
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value)
+                handleInputChange('confirmPassword', e.target.value)
+              }}
+              sx={{
+                '& .MuiInputBase-root': {
+                  height: 50,
+                  borderRadius: 2,
+                },
+              }}
+              error={Boolean(errors.confirmPassword)}
+              helperText={errors.confirmPassword}
             />
 
             {/* Nút xác nhận thay đổi mật khẩu */}
@@ -86,7 +164,7 @@ const ChangePassword: React.FC = () => {
               color='primary'
               onClick={handleChangePassword}
               disabled={loading}
-              className='mt-4'
+              className=" w-full h-12 rounded-lg text-white font-semibold bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400"
             >
               {loading ? 'Đang xử lý...' : 'Xác nhận'}
             </Button>

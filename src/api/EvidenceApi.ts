@@ -1,17 +1,8 @@
-import axios from 'axios'
-import { store } from '~/store/store'
-
+import ClientApi from './ClientApi'
 const EvidenceApi = {
   SubmitMyEvent: async (payload: any) => {
-    const token = store.getState().auth.accessToken
     try {
-      const response = await axios.post('http://localhost:8080/api/external-events', payload, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      console.log(response)
+      const response = await ClientApi.post('/external-events', payload)
       if (response.status === 200) {
         return response.data
       }
@@ -20,19 +11,27 @@ const EvidenceApi = {
     }
   },
   getMyEvidenceList: async () => {
-    const token = store.getState().auth.accessToken
     try {
-      const response = await axios.get('http://localhost:8080/api/external-events/my-events', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      console.log(response)
+      const response = await ClientApi.get('/external-events/my-events')
       if (response.status === 200) {
         return response.data
       }
     } catch (error) {
       console.log('error while get my-events', error)
+    }
+  },
+  createExternalEvent: async (formData: FormData) => {
+    try {
+      const response = await ClientApi.post('/external-events/create-externalevent', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      if (response.status === 200) {
+        return response.data
+      }
+    } catch (error) {
+      console.log('error while creating external event', error)
     }
   }
 }

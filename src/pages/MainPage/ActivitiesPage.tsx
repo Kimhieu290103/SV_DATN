@@ -30,6 +30,7 @@ const ActivitiesPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(pageParam + 1)
   const [eventsData, setEventsData] = useState<EventsData>({ events: [], totalPage: 0 })
   const [isLoading, setIsLoading] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value)
@@ -39,6 +40,7 @@ const ActivitiesPage: React.FC = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       setIsLoading(true)
+      setHasError(false) // reset trạng thái lỗi trước mỗi lần fetch
       try {
         const data = await EventApi.getEventByType(eventTypeId, currentPage - 1, limit)
         setEventsData({
@@ -47,10 +49,12 @@ const ActivitiesPage: React.FC = () => {
         })
       } catch (error) {
         console.error('Error fetching events:', error)
+        setHasError(true)
+      } finally {
+        setIsLoading(false)
       }
-      setIsLoading(false)
     }
-
+  
     fetchEvents()
   }, [eventTypeId, currentPage, limit])
 
@@ -66,6 +70,10 @@ const ActivitiesPage: React.FC = () => {
       {isLoading ? (
         <div className='flex justify-center items-center min-h-[500px]'>
           <CircularProgress />
+        </div>
+      ) : hasError ? (
+        <div className='text-red-500 text-center mt-10'>
+          Không thể tải dữ liệu. Vui lòng kiểm tra kết nối mạng hoặc thử lại sau.
         </div>
       ) : (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>

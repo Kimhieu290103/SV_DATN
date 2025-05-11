@@ -10,7 +10,7 @@ interface SideNavProps {
 const SideNav: React.FC<SideNavProps> = ({ propName }) => {
   const user = store.getState().user
   return (
-    <div className='flex flex-col border border-[#d1d2e0] w-1/4'>
+    <div className='flex flex-col border border-[#d1d2e0] w-1/4 rounded-xl shadow-md'>
       <div className='flex flex-col justify-center items-center p-5'>
         <Avatar sx={{ width: 100, height: 100 }}>{user?.fullname?.trim().slice(-1)}</Avatar>
 

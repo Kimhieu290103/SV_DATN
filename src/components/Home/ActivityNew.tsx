@@ -36,11 +36,16 @@ const ActivityNew = () => {
       setIsLoading(true)
       try {
         const result = await EventApi.getEvents(0, 6)
-        setData(result.events)
+        if (result && result.events) {
+          setData(result.events)
+          setIsLoading(false) // chỉ tắt loading nếu có dữ liệu hợp lệ
+        } else {
+          console.error('Không có dữ liệu sự kiện trả về')
+          // vẫn giữ loading = true
+        }
       } catch (error) {
         console.error('Lỗi khi lấy dữ liệu sự kiện:', error)
-      } finally {
-        setIsLoading(false)
+        // không setIsLoading(false) => giữ nguyên vòng tròn loading
       }
     }
     getData()
