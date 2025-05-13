@@ -52,7 +52,7 @@ const UserDisciplinaryPoint: React.FC = () => {
                         </div>
                     ) : (
                         <div className='overflow-x-auto w-full mb-4'> {/* Đã thêm class 'w-full' */}
-                            <h2 className='text-xl font-bold mb-6 mt-6 '>Điểm rèn luyện theo học kỳ</h2>
+                            <h2 className='text-xl font-bold mb-6 mt-6 text-blue-900'>Điểm rèn luyện theo học kỳ</h2>
                             <table className='w-full border-collapse text-sm md:text-base rounded-sm overflow-hidden '>
                                 <thead>
                                     <tr className=' border-0 bg-blue-500 text-white'>
@@ -78,7 +78,7 @@ const UserDisciplinaryPoint: React.FC = () => {
                                 </tbody>
                             </table>
                             <div className='mt-4'>
-                                <span className='font-semibold'>Tổng điểm rèn luyện:</span> {totalPoints}
+                                <span className='font-semibold text-blue-900'>Tổng điểm rèn luyện:</span> {totalPoints}
                             </div>
                         </div>
                     )}

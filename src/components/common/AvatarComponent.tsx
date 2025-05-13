@@ -1,6 +1,6 @@
 import React, { MouseEventHandler } from 'react'
 import Avatar from '@mui/material/Avatar'
-
+import AvatarDefaulf from "../../assets/images/non-svg/avatar.jpg"
 interface AvatarProps {
   alt?: string
   src?: string
@@ -12,7 +12,7 @@ const AvatarComponent: React.FC<AvatarProps> = ({ onMouseEnter, onMouseLeave, sr
   return (
     <Avatar
       alt='avatar'
-      src={src}
+      src={AvatarDefaulf}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       className='w-10 h-10 cursor-pointer'

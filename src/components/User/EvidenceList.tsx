@@ -178,13 +178,14 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
   return (
     <div className='w-full overflow-x-auto p-4 min-h-[230px]'>
       <div className='flex justify-between items-center mb-4'>
-        <h2 className='text-xl font-bold '>Danh sách minh chứng</h2>
+        <h2 className='text-xl font-bold text-blue-900 '>Danh sách minh chứng</h2>
         <div>
           <button
             onClick={handleOpen}
-            className='bg-[#4F959D] text-white px-6 py-2 rounded-lg 
+            className='bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-lg 
     text-lg font-semibold shadow-md transition-all duration-300 
-    hover:bg-[#3d7f87] focus:outline-none focus:ring-2 focus:ring-[#4F959D] focus:ring-offset-2 active:scale-95'
+    hover:from-blue-600 hover:to-purple-700
+    focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 active:scale-95'
           >
             Thêm mới
           </button>
@@ -220,8 +221,10 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
                         {item.points}
                       </a>
                     </td>
-                    <td className='border-0 p-2 text-center text-ellipsis max-w-[150px] whitespace-nowrap overflow-hidden'>
-                      <a href={item.proofUrl}>{item.proofUrl}</a>
+                    <td className="border-0 p-2 text-center text-ellipsis max-w-[150px] whitespace-nowrap overflow-hidden">
+                      <a href={item.proofUrl} className="text-blue-500 hover:underline">
+                        Xem minh chứng
+                      </a>
                     </td>
                     <td
                       className={`border-0 p-2 text-center ${item.status === 'APPROVED'

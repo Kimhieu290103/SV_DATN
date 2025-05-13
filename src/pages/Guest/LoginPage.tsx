@@ -182,7 +182,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className='bg-gray-100 min-h-screen flex flex-col justify-center items-center p-4'>
+    <div className='bg-gradient-to-br from-blue-100 via-white to-purple-100 min-h-screen flex flex-col justify-center items-center p-4'>
       <div className='w-full max-w-md bg-white shadow-lg rounded-lg p-6'>
         <div className='mb-6'>
           <h1 className='font-inter text-center text-4xl font-bold text-blue-900'>Đăng nhập</h1>

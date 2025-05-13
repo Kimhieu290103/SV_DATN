@@ -155,30 +155,37 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
                 </Stack>
                 <div className='flex flex-col gap-2'>
                   <div>
-                    <span className='font-bold'>Địa điểm:</span> {eventData.location}
+                    <span className='font-bold text-blue-900'>Địa điểm:</span> {eventData.location}
                   </div>
                   <div>
-                    <span className='font-bold'>Điểm phục vụ cộng đồng:</span> {eventData.score} điểm
+                    <span className='font-bold text-blue-900'>Điểm phục vụ cộng đồng:</span> {eventData.score} điểm
                   </div>
                   <ol>
-                    <span className='font-bold'>Các tiêu chí của sự kiện: </span>
+                    <span className='font-bold text-blue-900'>Các tiêu chí của sự kiện: </span>
                     {eventData?.eventCriteria?.eventCriteria?.map((criteria, index) => (
                       <li key={index}>
                         <span> - {criteria.name} </span>
                       </li>
                     ))}
                   </ol>
+                   <div>
+                    <span className='font-bold text-blue-900'>Ngày bắt đầu đăng ký:</span>{' '}
+                    {moment(eventData.registrationStartDate).format('DD/MM/YYYY')}
+                  </div>
                   <div>
-                    <span className='font-bold'>Ngày kết thúc đăng ký:</span>{' '}
+                    <span className='font-bold text-blue-900'>Ngày kết thúc đăng ký:</span>{' '}
                     {moment(eventData.registrationEndDate).format('DD/MM/YYYY')}
                   </div>
+                 <div>
+  <span className='font-bold text-blue-900'>Hoạt động diễn ra từ ngày:</span>{' '}
+  {moment(eventData.date).format('DD/MM/YYYY HH:mm')} đến ngày{' '}
+  {moment(eventData.endDate).format('DD/MM/YYYY HH:mm')}
+</div>
                   <div>
-                    <span className='font-bold'>Hoạt động diễn ra từ ngày:</span>{' '}
-                    {moment(eventData.date).format('DD/MM/YYYY')} đến ngày{' '}
-                    {moment(eventData.endDate).format('DD/MM/YYYY')}
+                    <span className='font-bold text-blue-900'>Thông tin thêm:</span> {eventData.additionalInfo} 
                   </div>
-                  <div>
-                    <span className='font-bold'>Thông tin thêm:</span> {eventData.additionalInfo} điểm
+                   <div>
+                    <span className='font-bold text-blue-900'>Điểm số:</span> {eventData.score} 
                   </div>
                 </div>
                 <div>

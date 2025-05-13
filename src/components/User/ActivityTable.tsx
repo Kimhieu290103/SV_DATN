@@ -26,7 +26,7 @@ const ActivityTable: React.FC<ActivityTableProps> = ({ events }) => {
   })
   return (
     <div className='overflow-x-auto min-h-[180px]'>
-      <h2 className='text-xl font-bold mb-4'>Danh sách hoạt động</h2>
+      <h2 className='text-xl font-bold mb-4 text-blue-900'>Danh sách hoạt động</h2>
       <table className='w-full border-collapse text-sm md:text-base rounded-sm overflow-hidden '>
         <thead>
           <tr className=' border-0 bg-blue-500 text-white'>

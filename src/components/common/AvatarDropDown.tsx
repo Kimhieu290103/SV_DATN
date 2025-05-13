@@ -83,7 +83,7 @@ const AvatarDropdown = () => {
               <Box className='w-full bg-white shadow-2xl p-4 md:p-6 lg:p-8 rounded-2xl '>
                 <Stack direction='row' alignItems='center' spacing={2}>
                   <Avatar src='avatar.jpg' alt='User Avatar'></Avatar>
-                  <Typography variant='h6' component='h2'>
+                  <Typography variant='h6' component='h2' className='text-blue-900'>
                     {user?.fullname}
                   </Typography>
                 </Stack>

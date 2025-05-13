@@ -1,8 +1,8 @@
-import { Avatar, Typography } from '@mui/material'
+import { Avatar } from '@mui/material'
 import React from 'react'
 import { store } from '~/store/store'
 import SideTabs from '../User/SideTabs'
-
+import AvatarDefaulf from "../../assets/images/non-svg/avatar.jpg"
 interface SideNavProps {
   propName?: string
 }
@@ -12,10 +12,14 @@ const SideNav: React.FC<SideNavProps> = ({ propName }) => {
   return (
     <div className='flex flex-col border border-[#d1d2e0] w-1/4 rounded-xl shadow-md'>
       <div className='flex flex-col justify-center items-center p-5'>
-        <Avatar sx={{ width: 100, height: 100 }}>{user?.fullname?.trim().slice(-1)}</Avatar>
+        <Avatar
+          src={AvatarDefaulf} // fallback ảnh mẫu nếu không có
+          alt='User Avatar'
+          sx={{ width: 100, height: 100 }}
+        />
 
         <span
-          className=' text-nowrap    text-blue-900 
+          className='mt-5 text-nowrap    text-blue-900 
              sm:text-xs md:text-base lg:text-xl xl:text-2xl 2xl:text-3xl font-medium'
         >
           Thông tin cá nhân
@@ -28,7 +32,7 @@ const SideNav: React.FC<SideNavProps> = ({ propName }) => {
       <SideTabs redirectPathname='/user/point' title='Điểm phục vụ cộng đồng' />
       <SideTabs redirectPathname='/user/chang-pass' title='Thay đổi mật khẩu' />
     </div>
-  ) 
+  )
 }
 
 export default SideNav

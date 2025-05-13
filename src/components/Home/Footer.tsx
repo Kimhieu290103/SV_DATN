@@ -24,7 +24,7 @@ const Footer: React.FC<Props> = ({ propName }) => {
 
           <div className='p-4'>
             <ul className='space-y-2'>
-              <li className='font-bold'>Giới thiệu</li>
+              <li className='font-bold  text-blue-900'>Giới thiệu</li>
               <li>Đại học Bách Khoa Đà Nẵng</li>
               <li>54 - Nguyễn Lương Bằng - Liên Chiểu</li>
             </ul>
@@ -32,7 +32,7 @@ const Footer: React.FC<Props> = ({ propName }) => {
 
           <div className='p-4'>
             <ul className='space-y-2'>
-              <li className='font-bold'>Liên kết</li>
+              <li className='font-bold  text-blue-900'>Liên kết</li>
               <li>Phòng Tổ chức - Hành chính </li>
               <li>Phòng Đào tạo</li>
               <li>Phòng Công tác sinh viên</li>
@@ -41,7 +41,7 @@ const Footer: React.FC<Props> = ({ propName }) => {
 
           <div className='p-4'>
             <ul className='space-y-2'>
-              <li className='font-bold'>Liên hệ</li>
+              <li className='font-bold  text-blue-900'>Liên hệ</li>
 
               <li>Hotline:012.345.6789 (9:AM to 8:PM)</li>
               <li>Email: dut@gmail.com</li>

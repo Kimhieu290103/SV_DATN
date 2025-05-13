@@ -65,7 +65,7 @@ const ActivitiesPage: React.FC = () => {
        xl:max-w-[1200px] 
        mx-auto'
     >
-      <h1 className='text-2xl font-bold my-4'>Danh sách Hoạt động</h1>
+      <h1 className='text-2xl font-bold my-4 text-blue-900'>Danh sách Hoạt động</h1>
       <ActivityTabsNavigation />
       {isLoading ? (
         <div className='flex justify-center items-center min-h-[500px]'>

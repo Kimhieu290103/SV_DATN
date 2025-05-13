@@ -164,7 +164,7 @@ const ChangePassword: React.FC = () => {
               color='primary'
               onClick={handleChangePassword}
               disabled={loading}
-              className=" w-full h-12 rounded-lg text-white font-semibold bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400"
+              className=" w-full h-12 rounded-lg text-white font-semibold bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-blue-300"
             >
               {loading ? 'Đang xử lý...' : 'Xác nhận'}
             </Button>
