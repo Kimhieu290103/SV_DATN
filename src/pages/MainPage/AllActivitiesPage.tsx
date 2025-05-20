@@ -30,7 +30,7 @@ const AllActivitiesPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value)
   }
 

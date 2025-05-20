@@ -1,14 +1,14 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
-import { store } from '~/store/store'
+
 import SideTabs from '../User/SideTabs'
 import AvatarDefaulf from "../../assets/images/non-svg/avatar.jpg"
 interface SideNavProps {
   propName?: string
 }
 
-const SideNav: React.FC<SideNavProps> = ({ propName }) => {
-  const user = store.getState().user
+const SideNav: React.FC<SideNavProps> = () => {
+
   return (
     <div className='flex flex-col border border-[#d1d2e0] w-1/4 rounded-xl shadow-md'>
       <div className='flex flex-col justify-center items-center p-5'>

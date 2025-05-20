@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from 'react'
+
 import Event from '~/model/Event/Event'
-import { CircularProgress } from '@mui/material'
-import UserApi from '~/api/UserApi'
-import { store } from '~/store/store'
 
 interface ActivityTableProps {
   events: Event[]
 }
 
 const ActivityTable: React.FC<ActivityTableProps> = ({ events }) => {
-  const [fiveGood, setFiveGood] = useState(false)
-  const userid = store.getState().user.id
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const result = await UserApi.checkFiveGood(userid)
-        if (result.mess === 'User đã hoàn thành 5 tiêu chí 5 tốt!') {
-          setFiveGood(true)
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getData()
-  })
+
   return (
     <div className='overflow-x-auto min-h-[180px]'>
       <h2 className='text-xl font-bold mb-4 text-blue-900'>Danh sách hoạt động</h2>

@@ -8,7 +8,8 @@ interface Props {
   propName?: string
 }
 
-const DefaultLayout: React.FC<Props> = ({ children }) => {
+// const DefaultLayout: React.FC<Props> = ({ children }) => {
+const DefaultLayout: React.FC<Props> = () => {
   return (
     <>
       <div className='bg-gradient-to-r from-purple-600 to-indigo-600 shadow-lg'>

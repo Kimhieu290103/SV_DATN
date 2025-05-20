@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import UserApi from '~/api/UserApi' // Đảm bảo đường dẫn này đúng với vị trí file UserApi của bạn
 
@@ -8,12 +8,12 @@ const ForgotPasswordPage = () => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
         setError(''); // Clear error khi người dùng bắt đầu nhập
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
         setMessage('');
@@ -31,7 +31,8 @@ const ForgotPasswordPage = () => {
 
         setLoading(true);
         try {
-            const data = await UserApi.forgotPassword(email);
+           await UserApi.forgotPassword(email);
+
             setEmail('');
             navigate('/reset-password');
         } catch (error: any) {

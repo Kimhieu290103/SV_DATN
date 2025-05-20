@@ -9,13 +9,24 @@ import {
   Button,
   CircularProgress,
   MenuItem,
-  FormHelperText,
+
 } from '@mui/material'
 import Evidence from '~/model/Evidence/Evidence'
 import EvidenceApi from '~/api/EvidenceApi'
 import SemesterApi from '~/api/SemesterApi'
 interface EvidenceListProps {
   data: Evidence[]
+}
+interface Semester {
+  id: string;
+  name: string;
+}
+interface FormErrors {
+  name?: string;
+  date?: string;
+  points?: string;
+  selectedSemester?: string;
+  proofFile?: string;
 }
 
 const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
@@ -35,14 +46,19 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
-  const [proofUrl, setProofUrl] = useState('')
   const [points, setPoints] = useState('')
   // const [semesterId, setSemesterId] = useState('')
-  const [semesters, setSemesters] = useState([])
+  const [semesters, setSemesters] = useState<Semester[]>([]);
   const [selectedSemester, setSelectedSemester] = useState('')
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    date?: string;
+    points?: string;
+    selectedSemester?: string;
+    proofFile?: string;
+  }>({});
   useEffect(() => {
     const fetchSemesters = async () => {
       const data = await SemesterApi.getSemesters()
@@ -52,37 +68,9 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
     }
     fetchSemesters()
   }, [])
-  // const handleSubmit = async () => {
-  //   setIsLoading(true)
-  //   const payload = {
-  //     name,
-  //     description,
-  //     date,
-  //     proof_url: proofUrl,
-  //     points: Number(points),
-  //     semester_id: Number(selectedSemester)
-  //   }
-
-  //   try {
-  //     const response = await EvidenceApi.SubmitMyEvent(payload)
-  //     console.log('Submit success:', response)
-  //     // Reset form sau khi submit
-  //     setName('')
-  //     setDescription('')
-  //     setDate('')
-  //     setProofUrl('')
-  //     setPoints('')
-  //     setSelectedSemester('')
-  //     handleClose()
-  //   } catch (error) {
-  //     console.error('Submit error:', error)
-  //   } finally {
-  //     setIsLoading(false)
-  //   }
-  // }
   const validateForm = () => {
     let isValid = true;
-    const newErrors: any = {};
+    const newErrors: FormErrors  = {};
 
     if (!name.trim()) {
       newErrors.name = 'Tên minh chứng không được để trống.';
@@ -150,30 +138,30 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
       setIsLoading(false);
     }
   };
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = event.target;
-    // Cập nhật state của trường
-    if (name === 'name') setName(value);
-    else if (name === 'description') setDescription(value);
-    else if (name === 'date') setDate(value);
-    else if (name === 'points') setPoints(value);
-    else if (name === 'selectedSemester') setSelectedSemester(value);
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  //   const { name, value } = event.target;
+  //   // Cập nhật state của trường
+  //   if (name === 'name') setName(value);
+  //   else if (name === 'description') setDescription(value);
+  //   else if (name === 'date') setDate(value);
+  //   else if (name === 'points') setPoints(value);
+  //   else if (name === 'selectedSemester') setSelectedSemester(value);
 
-    // Xóa thông báo lỗi cho trường đang được nhập
-    setErrors(prevErrors => ({
-      ...prevErrors,
-      [name]: undefined,
-    }));
-  };
+  //   // Xóa thông báo lỗi cho trường đang được nhập
+  //   setErrors(prevErrors => ({
+  //     ...prevErrors,
+  //     [name]: undefined,
+  //   }));
+  // };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setProofFile(file);
-      // Xóa thông báo lỗi cho tệp khi chọn tệp mới
-      setErrors(prevErrors => ({ ...prevErrors, proofFile: undefined }));
-    }
-  };
+  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     setProofFile(file);
+  //     // Xóa thông báo lỗi cho tệp khi chọn tệp mới
+  //     setErrors(prevErrors => ({ ...prevErrors, proofFile: undefined }));
+  //   }
+  // };
 
   return (
     <div className='w-full overflow-x-auto p-4 min-h-[230px]'>
@@ -376,7 +364,7 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
               {proofFile ? proofFile.name : 'Chọn tệp'}
             </Button>
           </label>
-          {errors.proofFile && <FormHelperText error>{errors.proofFile}</FormHelperText>}
+          {/* {errors.proofFile && <FormHelperText error>{errors.proofFile}</FormHelperText>} */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color='secondary'>

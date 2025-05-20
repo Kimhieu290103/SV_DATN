@@ -32,7 +32,7 @@ const ActivitiesPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value)
     navigate(`/activities?eventTypeId=${eventTypeId}&page=${value - 1}&limit=${limit}`)
   }

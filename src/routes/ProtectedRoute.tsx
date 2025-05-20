@@ -6,7 +6,7 @@ interface Props {
   propName?: string
 }
 
-const PrivateRoute: React.FC<Props> = ({ children, ...rest }) => {
+const PrivateRoute: React.FC<Props> = () => {
   const accessToken = store.getState()?.auth?.accessToken
 
   return accessToken ? <Outlet /> : <Navigate to='/login' />

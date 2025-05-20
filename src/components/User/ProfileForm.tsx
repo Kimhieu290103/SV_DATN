@@ -18,7 +18,7 @@ const ProfileForm: React.FC = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const data = await UserApi.info(user?.id); // Gọi API info với user id
+        const data = await UserApi.info(); // Gọi API info với user id
         setUserInfo(data);
       } catch (error) {
         console.error('Lỗi khi tải thông tin người dùng', error);
