@@ -8,7 +8,7 @@ interface AvatarProps {
   onMouseLeave?: MouseEventHandler
 }
 
-const AvatarComponent: React.FC<AvatarProps> = ({ onMouseEnter, onMouseLeave, src = '' }) => {
+const AvatarComponent: React.FC<AvatarProps> = ({ onMouseEnter, onMouseLeave }) => {
   return (
     <Avatar
       alt='avatar'

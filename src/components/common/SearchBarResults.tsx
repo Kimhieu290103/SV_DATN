@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import Event from '~/model/Event/Event'
 interface SearchBarResultsProps {
-  results: any[]
+  results:  Event[]
 }
 
 const SearchBarResults: React.FC<SearchBarResultsProps> = ({ results }) => {

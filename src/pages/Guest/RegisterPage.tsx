@@ -1,20 +1,19 @@
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
-    fullname: "",
-    phone_number: "",
-    student_id: "",
-    address: "",
-    date_of_birth: "",
-    email: "",
-    username: "",
-    password: "",
-    retype_password: "",
-    class_id: "",
-    role_id: "",
+    fullname: '',
+    phone_number: '',
+    student_id: '',
+    address: '',
+    date_of_birth: '',
+    email: '',
+    username: '',
+    password: '',
+    retype_password: '',
+    class_id: '',
+    role_id: '',
   });
 
   const handleChange = (e) => {
@@ -24,27 +23,27 @@ const RegisterPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.password !== formData.retype_password) {
-      alert("Mật khẩu không khớp!");
+      alert('Mật khẩu không khớp!');
       return;
     }
-    console.log("Dữ liệu đăng ký:", formData);
+    console.log('Dữ liệu đăng ký:', formData);
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4 mt-16">
-      <div className="w-full max-w-lg bg-white shadow-xl rounded-lg p-8">
-        <h1 className="text-3xl font-bold text-center text-blue-900">Đăng ký</h1>
-        <p className="text-gray-500 text-center mt-2">Nhập thông tin để tạo tài khoản mới</p>
+    <div className='bg-gray-100 min-h-screen flex items-center justify-center p-4 mt-16'>
+      <div className='w-full max-w-lg bg-white shadow-xl rounded-lg p-8'>
+        <h1 className='text-3xl font-bold text-center text-blue-900'>Đăng ký</h1>
+        <p className='text-gray-500 text-center mt-2'>Nhập thông tin để tạo tài khoản mới</p>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit} className='mt-6 space-y-4'>
           {/* Họ và tên */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Họ và tên</label>
+            <label className='block text-sm font-medium text-gray-700'>Họ và tên</label>
             <input
-              type="text"
-              name="fullname"
-              placeholder="Họ và tên"
-              className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-900 focus:border-blue-900"
+              type='text'
+              name='fullname'
+              placeholder='Họ và tên'
+              className='w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-900 focus:border-blue-900'
               onChange={handleChange}
               required
             />

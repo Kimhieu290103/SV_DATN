@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import UserApi from '~/api/UserApi'; // Đảm bảo đường dẫn này đúng với vị trí file UserApi của bạn
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import UserApi from '~/api/UserApi' // Đảm bảo đường dẫn này đúng với vị trí file UserApi của bạn
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('');

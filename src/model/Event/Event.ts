@@ -19,5 +19,5 @@ export default interface Event {
   eventType: string
   semester: semester[]
   eventImage: EventImage[]
-  eventCriteria: EventCriteria[]
+  eventCriteria: EventCriteria
 }

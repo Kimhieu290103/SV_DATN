@@ -3,7 +3,7 @@ import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import { Avatar, Button, CardActions } from '@mui/material'
+import {  Button, CardActions } from '@mui/material'
 import Event from '~/model/Event/Event'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { styled } from '@mui/material/styles'
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import FormattedDate from '~/utils/FormattedDate'
 import { CircularProgress } from '@mui/material'
 import { useState } from 'react'
-import defaultImage from '../../../public/favicon/sinh20vic3aan20bk.jpg';
+import defaultImage from '/favicon/sinh20vic3aan20bk.jpg';
 interface CardProps {
   CardInfo: Event
 }
@@ -25,7 +25,7 @@ const CardHeaderNoPadding = styled(CardHeader)(`
 
 const ActivityCard: React.FC<CardProps> = ({ CardInfo }) => {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
   return (
     <div className='flex flex-col justify-center items-center h-full sm:p-1 md:p-2 lg:p-2 xl:p-4 2xl:p-8'>
       {isLoading ? (

@@ -1,4 +1,4 @@
-export default interface semester {
+export default interface Semester {
   id: number
   name: string
   startdate: null

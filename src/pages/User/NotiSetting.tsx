@@ -5,7 +5,7 @@ interface HomeProps {
   propName?: string
 }
 
-const NotiSetting: React.FC<HomeProps> = ({ propName }) => {
+const NotiSetting: React.FC<HomeProps> = () => {
   return (
     <div className='min-h-screen flex flex-col m-0 mt-10 mt-30'>
       <div

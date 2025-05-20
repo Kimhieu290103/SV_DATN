@@ -3,15 +3,15 @@ import { useSearchParams } from 'react-router-dom'
 import { CircularProgress, Pagination } from '@mui/material'
 import ActivityCard from '~/components/Home/ActivityCard'
 import EventApi from '~/api/EventApi'
-
-interface Event {
-  id: number
-  name: string
-  date: string
-  points: number
-  proofUrl: string
-  status: 'APPROVED' | 'REJECTED' | 'PENDING' | string
-}
+import Event from '~/model/Event/Event'
+// interface Event {
+//   id: number
+//   name: string
+//   date: string
+//   points: number
+//   proofUrl: string
+//   status: 'APPROVED' | 'REJECTED' | 'PENDING' | string
+// }
 
 interface EventsData {
   events: Event[]
@@ -28,7 +28,7 @@ const AllActivitiesPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(pageParam + 1)
   const [eventsData, setEventsData] = useState<EventsData>({ events: [], totalPage: 0 })
   const [isLoading, setIsLoading] = useState(false)
-  const [hasError, setHasError] = useState(false)
+  
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value)

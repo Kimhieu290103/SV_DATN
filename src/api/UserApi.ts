@@ -10,7 +10,7 @@ const UserApi = {
       console.log('error while get getRegistedEvents', error)
     }
   },
-  RemoveRegistedEvents: async (eventID: string) => {
+  removeRegistedEvents: async (eventID: string) => {
     try {
       const response = await ClientApi.delete(`/registrations/${eventID}`)
       if (response.status === 200) {

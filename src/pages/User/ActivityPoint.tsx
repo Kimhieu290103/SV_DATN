@@ -7,18 +7,18 @@ import UserActivityContent from '~/components/User/UserActivityContent'
 import Event from '~/model/Event/Event'
 import { store } from '~/store/store'
 import SemesterSelect from '~/components/User/SemeterSelect'
-import semester from '~/model/semester/semester'
+import Semester from '~/model/semester/semester'
 import { CircularProgress } from '@mui/material'
 
 interface HomeProps {
   propName?: string
 }
 
-const ActivityPoint: React.FC<HomeProps> = ({ propName }) => {
+const ActivityPoint: React.FC<HomeProps> = () => {
   const userID = store.getState()?.user?.id
 
   const [events, setEvents] = useState<Event[]>([])
-  const [semesters, setSemesters] = useState<semester[]>([])
+  const [semesters, setSemesters] = useState<Semester[]>([])
   const [selectedSemester, setSelectedSemester] = useState<number | null>(null)
   const [loadingEvents, setLoadingEvents] = useState<boolean>(false)
 
@@ -46,10 +46,10 @@ const ActivityPoint: React.FC<HomeProps> = ({ propName }) => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      if (selectedSemester !== null) {
+      if (selectedSemester !== null && userID !== null && userID !== undefined) {
         setLoadingEvents(true)
         try {
-          const result = await UserApi.getAttendedEvents(userID, selectedSemester)
+          const result = await UserApi.getAttendedEvents(Number(userID), selectedSemester)
           setEvents(result)
         } catch (error) {
           console.error('Lỗi khi lấy dữ liệu hoạt động:', error)

@@ -14,9 +14,10 @@ interface HomeProps {
   propName?: string
 }
 
-const ActivityPoint: React.FC<HomeProps> = ({ propName }) => {
-  const userID = store.getState()?.user?.id
-
+const ActivityPoint: React.FC<HomeProps> = () => {
+  //const userID = store.getState()?.user?.id
+  const userIDRaw = store.getState()?.user?.id // string | null
+  const userID = userIDRaw ? Number(userIDRaw) : null
   const [events, setEvents] = useState<Event[]>([])
   const [semesters, setSemesters] = useState<semester[]>([])
   const [selectedSemester, setSelectedSemester] = useState<number | null>(null)
@@ -46,7 +47,7 @@ const ActivityPoint: React.FC<HomeProps> = ({ propName }) => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      if (selectedSemester !== null) {
+      if (selectedSemester !== null && userID !== null && !isNaN(userID)) {
         setLoadingEvents(true)
         try {
           const result = await UserApi.getRegisteredEvents(userID, selectedSemester)
@@ -68,8 +69,8 @@ const ActivityPoint: React.FC<HomeProps> = ({ propName }) => {
           px-4 md:px-16 lg:px-24 py-20 bg-[#ffffff] w-full 
           sm:max-w-full md:max-w-3xl lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[1500px] mx-auto rounded-2xl shadow-xl border border-gray-200 mt-20 mb-20'
       >
-        <SideNav className="h-full"/>
-        <MainContent className='flex-1 min-h-full' title='Phục vụ cộng đồng' decs='Thông tin về điểm phục vụ cộng đồng và sinh viên 5 tốt'>
+        <SideNav/>
+        <MainContent  title='Phục vụ cộng đồng' decs='Thông tin về điểm phục vụ cộng đồng và sinh viên 5 tốt'>
           <SemesterSelect semesters={semesters} selectedSemester={selectedSemester} onChange={handleSemesterChange} />
           {loadingEvents ? (
             <div className='flex justify-center items-center w-full py-10'>

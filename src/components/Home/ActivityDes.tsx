@@ -4,11 +4,12 @@ import { Link, useParams } from 'react-router-dom'
 import EventApi from '~/api/EventApi'
 import UserApi from '~/api/UserApi'
 import Event from '~/model/Event/Event'
+import EventCri from '~/model/Event/EventCri'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
 import moment from 'moment'
 import FormattedDate from '~/utils/FormattedDate'
 import { store } from '~/store/store'
-import defaultImage from '../../../public/favicon/sinh20vic3aan20bk.jpg';
+
 interface ActivityDesProps {
   propName?: number
 }
@@ -31,7 +32,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   }
 }))
 
-const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
+const ActivityDes: React.FC<ActivityDesProps> = () => {
   const { id } = useParams<{ id: string }>()
   const [eventData, setEventData] = useState<Event | null>(null)
   const [registed, setRegisted] = useState<Event[]>([])
@@ -39,10 +40,17 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!id) return;
       setIsLoading(true)
       try {
+        const numericId = Number(id);
+        if (isNaN(numericId)) {
+          console.error('Invalid id:', id);
+          setIsLoading(false);
+          return;
+        }
         const [eventResult, registedResult] = await Promise.all([
-          EventApi.getEvent(`${id}`),
+          EventApi.getEvent(numericId),
           UserApi.getRegistedEvents()
         ])
         setEventData(eventResult)
@@ -56,14 +64,27 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
     fetchData()
   }, [id])
 
+  // const checkRegister = useMemo(() => {
+  //   if (!eventData) return false
+  //   return (registed || []).some((event) => event.id === eventData.id)
+  // }, [registed, eventData])
   const checkRegister = useMemo(() => {
-    if (!eventData) return false
-    return (registed || []).some((event) => event.id === eventData.id)
+    if (!eventData?.id) return false
+    return registed.some((event) => event.id === eventData.id)
   }, [registed, eventData])
 
   const handleRegister = async () => {
+    if (!id) {
+      console.error('Invalid id');
+      return;
+    }
+    const numericId = Number(id);
+    if (isNaN(numericId)) {
+      console.error('Invalid id, not a number:', id);
+      return;
+    }
     try {
-      await EventApi.registerEvent(`${id}`)
+      await EventApi.registerEvent(numericId)
       const updatedRegisted = await UserApi.getRegistedEvents()
       setRegisted(updatedRegisted || [])
     } catch (error) {
@@ -73,7 +94,7 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
 
   const handleUnregister = async () => {
     try {
-      await UserApi.RemoveRegistedEvents(`${eventData?.id}`)
+      await UserApi.removeRegistedEvents(`${eventData?.id}`)
       const updatedRegisted = await UserApi.getRegistedEvents()
       setRegisted(updatedRegisted || [])
     } catch (error) {
@@ -130,7 +151,12 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
               <div className='flex flex-row justify-center items-center pb-4'>
                 <img
                   className='w-full rounded-lg'
-                  src={eventData.eventImage[0]?.imageUrl || defaultImage}
+                    src={
+                      Array.isArray(eventData.eventImage) && eventData.eventImage.length > 0
+                        ? eventData.eventImage[0].imageUrl || "/favicon/sinh20vic3aan20bk.jpg"
+                        : "/favicon/sinh20vic3aan20bk.jpg"
+                    }
+
                   alt={eventData.name}
                 />
               </div>
@@ -162,13 +188,13 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
                   </div>
                   <ol>
                     <span className='font-bold text-blue-900'>Các tiêu chí của sự kiện: </span>
-                    {eventData?.eventCriteria?.eventCriteria?.map((criteria, index) => (
+                    {eventData.eventCriteria.eventCriteria.map((criteria: EventCri, index: number) => (
                       <li key={index}>
                         <span> - {criteria.name} </span>
                       </li>
                     ))}
                   </ol>
-                   <div>
+                  <div>
                     <span className='font-bold text-blue-900'>Ngày bắt đầu đăng ký:</span>{' '}
                     {moment(eventData.registrationStartDate).format('DD/MM/YYYY')}
                   </div>
@@ -176,16 +202,16 @@ const ActivityDes: React.FC<ActivityDesProps> = ({ propName }) => {
                     <span className='font-bold text-blue-900'>Ngày kết thúc đăng ký:</span>{' '}
                     {moment(eventData.registrationEndDate).format('DD/MM/YYYY')}
                   </div>
-                 <div>
-  <span className='font-bold text-blue-900'>Hoạt động diễn ra từ ngày:</span>{' '}
-  {moment(eventData.date).format('DD/MM/YYYY HH:mm')} đến ngày{' '}
-  {moment(eventData.endDate).format('DD/MM/YYYY HH:mm')}
-</div>
                   <div>
-                    <span className='font-bold text-blue-900'>Thông tin thêm:</span> {eventData.additionalInfo} 
+                    <span className='font-bold text-blue-900'>Hoạt động diễn ra từ ngày:</span>{' '}
+                    {moment(eventData.date).format('DD/MM/YYYY HH:mm')} đến ngày{' '}
+                    {moment(eventData.endDate).format('DD/MM/YYYY HH:mm')}
                   </div>
-                   <div>
-                    <span className='font-bold text-blue-900'>Điểm số:</span> {eventData.score} 
+                  <div>
+                    <span className='font-bold text-blue-900'>Thông tin thêm:</span> {eventData.additionalInfo}
+                  </div>
+                  <div>
+                    <span className='font-bold text-blue-900'>Điểm số:</span> {eventData.score}
                   </div>
                 </div>
                 <div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import SearchBarResults from './SearchBarResults'
 import EventApi from '~/api/EventApi'
-
+import Event from '~/model/Event/Event'
 interface Props {
     isScrolled?: boolean
 }
@@ -10,7 +10,7 @@ interface Props {
 const SearchBar: React.FC<Props> = ({ isScrolled }) => {
     const location = useLocation()
     const [query, setQuery] = useState<string>('')
-    const [results, setResults] = useState<any[]>([]) // Lưu trữ toàn bộ đối tượng sự kiện
+    const [results, setResults] = useState<Event[]>([]) // Lưu trữ toàn bộ đối tượng sự kiện
     const [isFocused, setIsFocused] = useState<boolean>(false)
     const [debouncedQuery, setDebouncedQuery] = useState<string>('');
 
@@ -91,4 +91,4 @@ const SearchBar: React.FC<Props> = ({ isScrolled }) => {
     )
 }
 
-export default SearchBar
+export default SearchBar;

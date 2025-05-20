@@ -4,15 +4,15 @@ import { CircularProgress, Pagination } from '@mui/material'
 import ActivityTabsNavigation from '~/components/Home/ActivityTabsNavigation'
 import ActivityCard from '~/components/Home/ActivityCard'
 import EventApi from '~/api/EventApi'
-
-interface Event {
-  id: number
-  name: string
-  date: string
-  points: number
-  proofUrl: string
-  status: 'APPROVED' | 'REJECTED' | 'PENDING' | string
-}
+import Event from '~/model/Event/Event'
+// interface Event {
+//   id: number
+//   name: string
+//   date: string
+//   points: number
+//   proofUrl: string
+//   status: 'APPROVED' | 'REJECTED' | 'PENDING' | string
+// }
 
 interface EventsData {
   events: Event[]

@@ -54,8 +54,6 @@ const AvatarDropdown = () => {
           onMouseEnter={handleOpen}
           src='avatar.jpg'
           alt='User Avatar'
-          className='cursor-pointer border-2 border-blue-900 hover:shadow-lg 
-          transition-all duration-200'
         />
       </Box>
       <>

@@ -4,7 +4,7 @@ interface Props {
   propName?: string
 }
 
-const Banner: React.FC<Props> = ({ propName }) => {
+const Banner: React.FC<Props> = () => {
   return (
     <div className='relative h-screen text-white'>
       <div className='absolute inset-0 z-0'>

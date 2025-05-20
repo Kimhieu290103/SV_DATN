@@ -9,7 +9,7 @@ interface Props {
   propName?: string
 }
 
-const LandingPage: React.FC<Props> = ({ propName }) => {
+const LandingPage: React.FC<Props> = () => {
   const activityNewRef = useRef<HTMLDivElement>(null)
   const criteriaRef = useRef<HTMLDivElement>(null)
 

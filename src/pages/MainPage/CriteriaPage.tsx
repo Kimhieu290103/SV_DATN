@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import CriteriaApi from '~/api/CriteriaApi'
+// import React, { useEffect, useState } from 'react'
+// import CriteriaApi from '~/api/CriteriaApi'
 import hoctaptot from '~/assets/images/svg/hoctaptot.svg'
 import hoinhaptot from '~/assets/images/svg/hoinhaptot.svg'
 import daoductot from '~/assets/images/svg/daoductot.svg'
@@ -12,16 +12,16 @@ interface Props {
   propName?: string
 }
 
-const CriteriaPage: React.FC<Props> = ({ propName }) => {
-  const [data, setData] = useState([])
-  useEffect(() => {
-    const getData = async () => {
-      const result = await CriteriaApi.getCriteria()
-      setData(result)
-      console.log('result', result)
-    }
-    getData()
-  }, [])
+const CriteriaPage: React.FC<Props> = () => {
+  // const [data, setData] = useState([])
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const result = await CriteriaApi.getCriteria()
+  //     setData(result)
+  //     console.log('result', result)
+  //   }
+  //   getData()
+  // }, [])
   return (
     <div className='block m-0 bg-[#f4f4f4] py-20 relative'>
       <img src={imgArea} className='absolute left-10 top-0' aria-hidden='true'></img>

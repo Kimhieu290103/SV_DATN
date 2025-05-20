@@ -12,7 +12,7 @@ interface Props {
   title?: string
 }
 
-const Header: React.FC<Props> = ({ title = 'Main Article Title' }) => {
+const Header: React.FC<Props> = () => {
   const [logo, setLogo] = useState(bigLogo)
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()

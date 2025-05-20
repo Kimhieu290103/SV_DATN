@@ -8,8 +8,11 @@ import ActivityCard from './ActivityCard'
 import { useEffect, useState } from 'react'
 import EventApi from '~/api/EventApi'
 import { CircularProgress } from '@mui/material'
+interface ArrowProps {
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}
 
-const PrevArrow = ({ onClick }) => (
+const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => (
   <div
     className='hidden md:block absolute left-[-1rem] sm:left-[-2rem] md:left-[-3rem] top-1/2 transform -translate-y-1/2 cursor-pointer z-10'
     onClick={onClick}
@@ -18,7 +21,7 @@ const PrevArrow = ({ onClick }) => (
   </div>
 )
 
-const NextArrow = ({ onClick }) => (
+const NextArrow: React.FC<ArrowProps> = ({ onClick }) => (
   <div
     className='hidden md:block absolute right-[-1rem] sm:right-[-2rem] md:right-[-3rem] top-1/2 transform -translate-y-1/2 cursor-pointer z-10'
     onClick={onClick}

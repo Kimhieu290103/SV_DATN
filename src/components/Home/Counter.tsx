@@ -13,7 +13,7 @@ interface Props {
   onStudentClick?: () => void
 }
 
-const Counter: React.FC<Props> = ({ propName, onActivityClick, onStudentClick }) => {
+const Counter: React.FC<Props> = ({ onActivityClick, onStudentClick }) => {
   return (
     <div className='px-4 md:px-16 lg:px-24 m-auto md:w-4/5 lg:w-4/5 sm:w-full z-10 relative bottom-15'>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 shadow h-fit bg-white rounded-[64.8px] px-2'>

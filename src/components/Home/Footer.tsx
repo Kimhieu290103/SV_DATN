@@ -9,7 +9,7 @@ interface Props {
   propName?: string
 }
 
-const Footer: React.FC<Props> = ({ propName }) => {
+const Footer: React.FC<Props> = () => {
   return (
     <div className='w-full  pb-8 sm:pb-8 lg:pb-12 bg-[#fafafa] '>
       <div className='mx-auto px-4 sm:px-6 lg:px-24 md:px-16'>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { store } from '~/store/store'
+// import { store } from '~/store/store'
 import MainContent from '~/components/User/MainContent'
 import SideNav from '~/components/User/SideNav'
 import { Button, TextField, Alert } from '@mui/material'
 import UserApi from '~/api/UserApi'
 
 const ChangePassword: React.FC = () => {
-  const userId = store.getState().user?.id
+  // const userId = store.getState().user?.id
 
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -21,7 +21,7 @@ const ChangePassword: React.FC = () => {
   })
 
   // Hàm để xử lý sự kiện nhập liệu và xóa lỗi khi người dùng nhập
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: string) => {
     setErrors((prevErrors) => ({
       ...prevErrors,
       [field]: '', // Xóa lỗi khi người dùng nhập
@@ -80,7 +80,7 @@ const ChangePassword: React.FC = () => {
         setNewPassword('')
         setConfirmPassword('')
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Lỗi khi đổi mật khẩu:', error)
       setMessage({ type: 'error', text: 'Đổi mật khẩu thất bại. Vui lòng kiểm tra lại.' })
     } finally {
@@ -108,7 +108,7 @@ const ChangePassword: React.FC = () => {
               value={currentPassword}
                 onChange={(e) => {
                 setCurrentPassword(e.target.value)
-                handleInputChange('currentPassword', e.target.value)
+                handleInputChange('currentPassword')
               }}
               sx={{
                 '& .MuiInputBase-root': {
@@ -127,7 +127,7 @@ const ChangePassword: React.FC = () => {
               value={newPassword}
               onChange={(e) => {
                 setNewPassword(e.target.value)
-                handleInputChange('newPassword', e.target.value)
+                handleInputChange('newPassword')
               }}
               sx={{
                 '& .MuiInputBase-root': {
@@ -146,7 +146,7 @@ const ChangePassword: React.FC = () => {
               value={confirmPassword}
               onChange={(e) => {
                 setConfirmPassword(e.target.value)
-                handleInputChange('confirmPassword', e.target.value)
+                handleInputChange('confirmPassword')
               }}
               sx={{
                 '& .MuiInputBase-root': {
