@@ -6,7 +6,7 @@ const ActivityTabsNavigation: React.FC = () => {
   const navigate = useNavigate()
   const [value, setValue] = React.useState('one')
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
 
     let eventTypeId: number

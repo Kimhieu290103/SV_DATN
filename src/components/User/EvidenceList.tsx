@@ -35,7 +35,7 @@ const EvidenceList: React.FC<EvidenceListProps> = ({ data }) => {
   const totalPages = Math.ceil(data?.length / itemsPerPage)
   const currentData = data?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value)
   }
 
