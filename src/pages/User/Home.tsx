@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = () => {
 
         {/* Main Content Component */}
         <MainContent title='Hồ sơ cá nhân' decs='Một số thông tin về bản thân của bạn'>
-          <div className='flex flex-col gap-4 max-w-md'>
+          <div className='flex flex-col gap-4 w-full'>
             {/* Profile Form Component */}
             <ProfileForm />
           </div>

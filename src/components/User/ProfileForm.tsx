@@ -57,11 +57,15 @@ const ProfileForm: React.FC = () => {
         <div className='mb-4'>
           <label className='block text-sm font-medium text-gray-700'>Tên đầy đủ</label>
           <input
-            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900'
+            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900 whitespace-nowrap overflow-hidden'
             required
-            disabled
+            readOnly
             defaultValue={userInfo?.fullname}
-            style={{ width: '100%' }} // Thêm inline style để đảm bảo chiều rộng
+            style={{
+              width: '100%',
+              overflowX: 'auto',
+              scrollbarWidth: 'none'
+            }} // Thêm inline style để đảm bảo chiều rộng
           />
         </div>
 
@@ -69,11 +73,15 @@ const ProfileForm: React.FC = () => {
         <div className='mb-4'>
           <label className='block text-sm font-medium text-gray-700'>MSSV</label>
           <input
-            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900'
+            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900 whitespace-nowrap overflow-hidden'
             required
-            disabled
+            readOnly
             defaultValue={userInfo?.studentId ?? 'Mã số sinh viên'}
-            style={{ width: '100%' }} // Thêm inline style để đảm bảo chiều rộng
+            style={{
+              width: '100%',
+              overflowX: 'auto',
+              scrollbarWidth: 'none'
+            }} // Thêm inline style để đảm bảo chiều rộng
           />
         </div>
 
@@ -82,11 +90,15 @@ const ProfileForm: React.FC = () => {
           <label className='block text-sm font-medium text-gray-700'>Email cá nhân</label>
           <input
             {...register('email')}
-            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900'
+            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900 whitespace-nowrap overflow-hidden'
             required
-            disabled
+            readOnly
             defaultValue={userInfo?.email ?? 'Email cá nhân'}
-            style={{ width: '100%' }} // Thêm inline style để đảm bảo chiều rộng
+            style={{
+              width: '100%',
+              overflowX: 'auto',
+              scrollbarWidth: 'none'
+            }} // Thêm inline style để đảm bảo chiều rộng
           />
           {errors.email && <p className='mt-1 text-sm text-red-600'>{errors.email.message}</p>}
         </div>
@@ -96,11 +108,15 @@ const ProfileForm: React.FC = () => {
           <label className='block text-sm font-medium text-gray-700'>Số điện thoại cá nhân</label>
           <input
             {...register('phoneNumber')}
-            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900'
+            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900 whitespace-nowrap overflow-hidden'
             required
-            disabled
+            readOnly
             defaultValue={userInfo?.phoneNumber ?? 'Số điện thoại'}
-            style={{ width: '100%' }} // Thêm inline style để đảm bảo chiều rộng
+            style={{
+              width: '100%',
+              overflowX: 'auto',
+              scrollbarWidth: 'none'
+            }} // Thêm inline style để đảm bảo chiều rộng
           />
           {errors.phoneNumber && <p className='mt-1 text-sm text-red-600'>{errors.phoneNumber.message}</p>}
         </div>
@@ -110,11 +126,15 @@ const ProfileForm: React.FC = () => {
           <label className='block text-sm font-medium text-gray-700'>Địa chỉ</label>
           <input
             {...register('address')}
-            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900'
+            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900 whitespace-nowrap overflow-hidden'
             required
-            disabled
+            readOnly
             defaultValue={userInfo?.address ?? 'Địa chỉ'}
-            style={{ width: '100%' }} // Thêm inline style để đảm bảo chiều rộng
+            style={{
+              width: '100%',
+              overflowX: 'auto',
+              scrollbarWidth: 'none'
+            }} // Thêm inline style để đảm bảo chiều rộng
           />
           {errors.address && <p className='mt-1 text-sm text-red-600'>{errors.address.message}</p>}
         </div>
@@ -123,11 +143,15 @@ const ProfileForm: React.FC = () => {
         <div className='mb-4'>
           <label className='block text-sm font-medium text-gray-700'>Lớp</label>
           <input
-            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900'
+            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900 whitespace-nowrap overflow-hidden'
             required
-            disabled
+            readOnly
             defaultValue={userInfo?.clazz ?? 'Lớp học'}
-            style={{ width: '100%' }} // Thêm inline style để đảm bảo chiều rộng
+            style={{
+              width: '100%',
+              overflowX: 'auto',
+              scrollbarWidth: 'none'
+            }} // Thêm inline style để đảm bảo chiều rộng
           />
         </div>
 
@@ -135,11 +159,15 @@ const ProfileForm: React.FC = () => {
         <div className='mb-4'>
           <label className='block text-sm font-medium text-gray-700'>Khoa</label>
           <input
-            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900'
+            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900 whitespace-nowrap overflow-hidden'
             required
-            disabled
+            readOnly
             defaultValue={userInfo?.department ?? 'Khoa'}
-            style={{ width: '100%' }} // Thêm inline style để đảm bảo chiều rộng
+            style={{
+              width: '100%',
+              overflowX: 'auto',
+              scrollbarWidth: 'none'
+            }} // Thêm inline style để đảm bảo chiều rộng
           />
         </div>
 
@@ -147,11 +175,15 @@ const ProfileForm: React.FC = () => {
         <div className='mb-4'>
           <label className='block text-sm font-medium text-gray-700'>Ngày sinh</label>
           <input
-            className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900'
+            className='mt-1 block w-[400px] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-900 focus:border-blue-900 whitespace-nowrap overflow-hidden '
             required
-            disabled
+            readOnly
             defaultValue={userInfo?.dateOfBirth ?? 'Ngày sinh'}
-            style={{ width: '100%' }} // Thêm inline style để đảm bảo chiều rộng
+            style={{
+              width: '100%',
+              overflowX: 'auto',
+              scrollbarWidth: 'none'
+            }} // Thêm inline style để đảm bảo chiều rộng
           />
         </div>
       </div>
