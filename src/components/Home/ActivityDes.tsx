@@ -161,7 +161,10 @@ const ActivityDes: React.FC<ActivityDesProps> = () => {
                 />
               </div>
               <div>
-                <Typography>{eventData.description}</Typography>
+                  <Typography sx={{ whiteSpace: 'pre-line' }}>
+                    {eventData.description.replace(/\\n/g, '\n')}
+                  </Typography>
+
               </div>
             </div>
           </div>
