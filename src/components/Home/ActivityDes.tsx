@@ -133,7 +133,7 @@ const ActivityDes: React.FC<ActivityDesProps> = () => {
           {/* Article Section */}
           <div className='flex flex-col w-full max-w-[800px] '>
             <div className='flex flex-row justify-between pb-8 w-full'>
-              <Link to={`http://localhost:3000/activities?eventTypeId=${eventTypeId}&page=0&limit=10`}>
+              <Link to={`https://datn-backend-yr7b.onrender.com/activities?eventTypeId=${eventTypeId}&page=0&limit=10`}>
                 <Typography variant='h6' sx={{ color: '#1c398e' }}>
                   {eventData.eventType}
                 </Typography>
